@@ -6,4 +6,4 @@ More precise doc coming soon
 ## Side
 
 ## Position
-You can do arifmetic operations on market positions
+You can do arithmetic operations on market positions.

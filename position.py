@@ -84,37 +84,15 @@ class Position:
              'price': str(self.price())})
 
 
-def remove_price(quote: Level, pos):
-    last_price = 0
-    while pos.abs_position() != 0:
-        if pos.abs_position() > quote.size:
-            pos = pos.add(quote.side, quote.size, quote.price)
-        else:
-            pos = pos.add(quote.side, pos.abs_position(), quote.price)
-        last_price = last_price
-        if quote.next_level is not None:
-            quote = quote.next_level
-        elif pos.abs_position():
-            raise RuntimeError
-
-    return pos, last_price
+def BID(pos=None, balance=None, price=None):
+    return Position(pos=pos, balance=balance, price=price, side=Side.BID)
 
 
-def exit_price_strategy(book: Book, pos: Position, config: MMParams, fee=Decimal(0.3)):
-    # pos, last_price = remove_price(book.quote(pos.side()), pos)
-    # if pos.balance > 0:
-    #     remove_pos = pos.oppoiste_with_price(last_price)
-    # print("fee " + str(pos * Decimal('0.3')))
-    remove_pos = pos.oppoiste_with_price(book.quote(pos.side()).price)
-    add_pos = pos.oppoiste_with_price(book.quote(Side.opposite(pos.side())).price)
-    fee_ = remove_pos * Decimal(fee / 100)
-    fin_pos = pos + remove_pos
-    if fin_pos > fee_:
-        return remove_pos
-    elif (pos + add_pos).balance > 0:
-        return add_pos
-    else:
-        return pos.opposite_with_margin(config.min_profit)
+def ASK(pos=None, balance=None, price=None):
+    return Position(pos=pos, balance=balance, price=price, side=Side.ASK)
+
+
+
 
 
 
