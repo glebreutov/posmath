@@ -39,6 +39,8 @@ this equals to
   
   ```Position(pos=10, price=10, side=Side.BID)```
   
+  ```ASK(pos=10, price=10)```
+  
  ## Operations on positions
  You can add or substract positons.
  
