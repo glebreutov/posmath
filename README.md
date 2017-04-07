@@ -8,7 +8,7 @@ More precise doc coming soon
 ## Position
 You can do arithmetic operations on market positions.
 
-## Defining a positions
+## Defining positions
 ```Position(pos=10, balance=-100)```
 
 would give you 
