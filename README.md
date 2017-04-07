@@ -35,6 +35,10 @@ this equals to
  
  ```{"balance": "100", "position": "-10", "side": "S", "price": "10.0"}```
  
+ you can also define positons with price instead of balance
+  
+  ```Position(pos=10, price=10, side=Side.BID)```
+  
  ## Operations on positions
  You can add or substract positons.
  
