@@ -1,4 +1,4 @@
-# Positon math
+# Position math
 Arithmetic operations on market positions.
 
 More precise doc coming soon
