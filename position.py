@@ -1,9 +1,8 @@
 import json
 from decimal import Decimal
 
-from book import Book, Level
+
 from posmath.side import Side
-from marketmaker import MMParams
 
 
 class Position:
@@ -40,11 +39,23 @@ class Position:
     def opposite(self):
         return Position(-1 * self.pos, -1 * self.balance)
 
-    def price(self):
+    def raw_price(self):
         if self.pos == 0:
             return 0
 
-        return round(abs(self.balance / self.pos), 4)
+        return abs(self.balance / self.pos)
+
+    #price rounded by 4 digits to side of quote
+    def price(self):
+        if self.pos == 0:
+            return Decimal('0')
+
+        prec = 10000
+        price, reminder = divmod(prec * abs(self.balance), abs(self.pos))
+        price /= prec
+        if reminder != 0:
+            price += Side.sign(self.side()) * Decimal('0.0001')
+        return price
 
     def __add__(self, opposition):
         return Position(pos=self.pos + opposition.pos, balance=self.balance + opposition.balance)
