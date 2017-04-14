@@ -1,6 +1,7 @@
 class Side:
     BID = 'B'
     ASK = 'S'
+    NONE = 'N'
     sides = (BID, ASK)
 
     @classmethod
