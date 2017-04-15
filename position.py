@@ -94,6 +94,12 @@ class Position:
              'side': self.side(),
              'price': str(self.price())})
 
+    def fee_pos(self, fee):
+        if fee > 0:
+            return Position(pos=0, balance=self.balance / 100 * fee, side=Side.BID)
+        else:
+            return Position(pos=0, balance=0)
+
 
 def BID(pos=None, balance=None, price=None):
     return Position(pos=pos, balance=balance, price=price, side=Side.BID)
