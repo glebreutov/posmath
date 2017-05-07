@@ -7,6 +7,17 @@ from posmath.side import Side
 
 class Position:
     def __init__(self, pos=None, balance=None, price=None, side=None):
+        assert pos is None or type(pos) in (str, Decimal, int)
+        assert balance is None or type(balance) in (str, Decimal, int)
+        assert price is None or type(price) in (str, Decimal, int)
+        assert side is None or side in Side.sides
+        if pos:
+            pos = Decimal(pos)
+        if balance:
+            balance = Decimal(balance)
+        if price:
+            price = Decimal(price)
+
         if balance is None and price is None:
             raise RuntimeError
 
