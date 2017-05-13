@@ -61,12 +61,12 @@ class Position:
         if self.pos == 0:
             return Decimal('0')
 
-        prec = 10000
+        prec = Decimal('10000')
         price, reminder = divmod(prec * abs(self.balance), abs(self.pos))
         price /= prec
         if reminder != 0:
             price += Side.sign(self.side()) * Decimal('0.0001')
-        return price
+        return round(price, 4)
 
     def __add__(self, opposition):
         return Position(pos=self.pos + opposition.pos, balance=self.balance + opposition.balance)
